@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -9,22 +11,23 @@ public class MainManager : MonoBehaviour
     public Brick BrickPrefab;
     public int LineCount = 6;
     public Rigidbody Ball;
-
+    [SerializeField] GameObject pauseScreen;
+    [SerializeField] Text highestScoreText;
     public Text ScoreText;
     public GameObject GameOverText;
-    
+    private bool isPaused = false;
     private bool m_Started = false;
-    private int m_Points;
-    
-    private bool m_GameOver = false;
+    public int m_Points;
+    public bool m_GameOver = false;
 
     
     // Start is called before the first frame update
     void Start()
     {
+        highestScoreText.text = GameManager.instance.highScoreOne;
         const float step = 0.6f;
         int perLine = Mathf.FloorToInt(4.0f / step);
-        
+        Time.timeScale = 1; 
         int[] pointCountArray = new [] {1,1,2,2,5,5};
         for (int i = 0; i < LineCount; ++i)
         {
@@ -40,25 +43,46 @@ public class MainManager : MonoBehaviour
 
     private void Update()
     {
-        if (!m_Started)
+        if (!isPaused)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (!m_Started)
             {
-                m_Started = true;
-                float randomDirection = Random.Range(-1.0f, 1.0f);
-                Vector3 forceDir = new Vector3(randomDirection, 1, 0);
-                forceDir.Normalize();
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    m_Started = true;
+                    float randomDirection = Random.Range(-1.0f, 1.0f);
+                    Vector3 forceDir = new Vector3(randomDirection, 1, 0);
+                    forceDir.Normalize();
 
-                Ball.transform.SetParent(null);
-                Ball.AddForce(forceDir * 2.0f, ForceMode.VelocityChange);
+                    Ball.transform.SetParent(null);
+                    Ball.AddForce(forceDir * 2.0f, ForceMode.VelocityChange);
+                }
+            }
+            else if (m_GameOver)
+            {
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                    isPaused = true;
+                    PauseGame();
+                }
             }
         }
-        else if (m_GameOver)
+    }
+
+    public void PauseGame()
+    {
+        if(!isPaused)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            }
+            isPaused = true;
+            pauseScreen.gameObject.SetActive(true);
+            Time.timeScale = 0.0f;
+        }
+        else if (isPaused)
+        {
+            isPaused = false;
+            pauseScreen.gameObject.SetActive(false);
+            Time.timeScale = 1.0f;
         }
     }
 
@@ -72,5 +96,25 @@ public class MainManager : MonoBehaviour
     {
         m_GameOver = true;
         GameOverText.SetActive(true);
+        GameManager.instance.playerScore = m_Points;
+        highestScoreText.text = GameManager.instance.highScoreOne;
     }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void ExitGame()
+    {
+        GameManager.instance.playerScore = m_Points;
+        GameManager.instance.HighScoreTable(GameManager.instance.playerName, GameManager.instance.playerScore);
+        GameManager.instance.SaveFile();
+#if UNITY_EDITOR
+        EditorApplication.ExitPlaymode();
+#else
+        Application.Quit();
+#endif
+    }
+
 }

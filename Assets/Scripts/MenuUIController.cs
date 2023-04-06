@@ -9,11 +9,13 @@ using UnityEngine.UI;
 public class MenuUIController : MonoBehaviour
 {
     // Variables
+    [SerializeField] TextMeshProUGUI highScoreMainMenuText;
+    [SerializeField] TextMeshProUGUI highScoreOneText;
+    [SerializeField] TextMeshProUGUI highScoreTwoText;
+    [SerializeField] TextMeshProUGUI highScoreThree;
     [SerializeField] GameObject highScoreHolder;
-    [SerializeField] TMP_InputField playerInput;
+    private TMP_InputField playerInput;
     private bool isHighScoreActive;
-
-    public string playerName;
 
     // Start is called before the first frame update
     void Start()
@@ -21,8 +23,17 @@ public class MenuUIController : MonoBehaviour
         highScoreHolder.SetActive(false);
         isHighScoreActive = false;
         playerInput = GetComponent<TMP_InputField>();
+        highScoreThree.text = GameManager.instance.highScoreThree;
+        highScoreTwoText.text = GameManager.instance.highScoreTwo;
+        highScoreOneText.text = GameManager.instance.highScoreOne;
+        highScoreMainMenuText.text = GameManager.instance.highScoreOne;
     }
-    
+
+    private void Update()
+    {
+        PlayerName();
+    }
+
     public void OpenHighScore()
     {
         if (!isHighScoreActive)
@@ -40,7 +51,7 @@ public class MenuUIController : MonoBehaviour
 
     public void PlayerName()
     {
-        playerName = playerInput.text;
+        playerInput.text = GameManager.instance.playerName;
     }
 
     public void StartGame()
