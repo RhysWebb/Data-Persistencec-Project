@@ -14,7 +14,7 @@ public class MenuUIController : MonoBehaviour
     [SerializeField] TextMeshProUGUI highScoreTwoText;
     [SerializeField] TextMeshProUGUI highScoreThree;
     [SerializeField] GameObject highScoreHolder;
-    private TMP_InputField playerInput;
+    [SerializeField] TMP_InputField playerInput;
     private bool isHighScoreActive;
 
     // Start is called before the first frame update
@@ -27,11 +27,6 @@ public class MenuUIController : MonoBehaviour
         highScoreTwoText.text = GameManager.instance.highScoreTwo;
         highScoreOneText.text = GameManager.instance.highScoreOne;
         highScoreMainMenuText.text = GameManager.instance.highScoreOne;
-    }
-
-    private void Update()
-    {
-        PlayerName();
     }
 
     public void OpenHighScore()
@@ -51,7 +46,7 @@ public class MenuUIController : MonoBehaviour
 
     public void PlayerName()
     {
-        playerInput.text = GameManager.instance.playerName;
+        GameManager.instance.playerName = playerInput.text;
     }
 
     public void StartGame()

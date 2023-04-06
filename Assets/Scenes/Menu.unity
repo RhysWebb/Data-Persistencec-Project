@@ -2778,6 +2778,7 @@ MonoBehaviour:
   highScoreTwoText: {fileID: 1254786696}
   highScoreThree: {fileID: 781613401}
   highScoreHolder: {fileID: 1844916790}
+  playerInput: {fileID: 507631984}
 --- !u!1 &1536394810
 GameObject:
   m_ObjectHideFlags: 0
