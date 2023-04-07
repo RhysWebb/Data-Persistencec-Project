@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class MenuUIController : MonoBehaviour
 {
     // Variables
+    [SerializeField] Button startGameButton;
     [SerializeField] TextMeshProUGUI highScoreMainMenuText;
     [SerializeField] TextMeshProUGUI highScoreOneText;
     [SerializeField] TextMeshProUGUI highScoreTwoText;
@@ -26,6 +27,7 @@ public class MenuUIController : MonoBehaviour
         highScoreTwoText.text = GameManager.instance.highScoreTwo;
         highScoreOneText.text = GameManager.instance.highScoreOne;
         highScoreMainMenuText.text = GameManager.instance.highScoreOne;
+        startGameButton.onClick.AddListener(PlayerName);
     }
 
     public void OpenHighScore()
@@ -50,6 +52,7 @@ public class MenuUIController : MonoBehaviour
 
     public void StartGame()
     {
+
         SceneManager.LoadScene(1);
     }
 

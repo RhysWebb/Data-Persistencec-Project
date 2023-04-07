@@ -97,6 +97,7 @@ public class MainManager : MonoBehaviour
         m_GameOver = true;
         GameOverText.SetActive(true);
         GameManager.instance.playerScore = m_Points;
+        GameManager.instance.HighScoreTable(GameManager.instance.playerName, GameManager.instance.playerScore);
         highestScoreText.text = GameManager.instance.highScoreOne;
     }
 
