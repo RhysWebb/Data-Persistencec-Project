@@ -665,7 +665,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 23.93}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -125, y: 0.19213867}
+  m_AnchoredPosition: {x: -186.2, y: -5.5}
   m_SizeDelta: {x: 94.9, y: 84.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &405072338
@@ -1986,7 +1986,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -132.19214}
-  m_SizeDelta: {x: 226.8, y: 50.9}
+  m_SizeDelta: {x: 340, y: 50.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1132108141
 MonoBehaviour:
@@ -2773,12 +2773,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e260af5be85a3bd4d8a0611fcb83e790, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startGameButton: {fileID: 118041381}
   highScoreMainMenuText: {fileID: 1692281252}
   highScoreOneText: {fileID: 2112309059}
   highScoreTwoText: {fileID: 1254786696}
   highScoreThree: {fileID: 781613401}
   highScoreHolder: {fileID: 1844916790}
-  playerInput: {fileID: 507631984}
+  playerInput: {fileID: 507631982}
 --- !u!1 &1536394810
 GameObject:
   m_ObjectHideFlags: 0
@@ -2956,7 +2957,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1692281250}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -2966,7 +2967,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 340, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1692281252
 MonoBehaviour:

@@ -21,6 +21,7 @@ public class MenuUIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameManager.instance.LoadSaveFile();
         highScoreHolder.SetActive(false);
         isHighScoreActive = false;
         highScoreThree.text = GameManager.instance.highScoreThree;

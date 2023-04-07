@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using UnityEngine;
 
@@ -55,11 +56,12 @@ public class GameManager : MonoBehaviour
             highScoreThreeInt = score;
             highScoreThree = name + " - " + score;
         }
+        SaveFile();
     }
 
 
     [System.Serializable]
-    class SaveDate
+    class SaveData
     {
         public string highScoreOneString;
         public int highScoreOneInt;
@@ -70,18 +72,33 @@ public class GameManager : MonoBehaviour
     }
     public void LoadSaveFile()
     {
+        string path = Application.persistentDataPath + "saveFile.json";
+        if (File.Exists(path))
+        {
+            string json = File.ReadAllText(path);
+            SaveData data = JsonUtility.FromJson<SaveData>(json);
 
+            highScoreOne = data.highScoreOneString;
+            highScoreOneInt = data.highScoreOneInt;
+            highScoreTwo = data.highScoreTwoString;
+            highScoreTwoInt = data.highScoreTwoInt;
+            highScoreThree = data.highScoreThreeString;
+            highScoreThreeInt = data.highScoreThreeInt;
+}
     }
 
     public void SaveFile()
     {
+        SaveData data = new SaveData();
+        data.highScoreOneString = highScoreOne;
+        data.highScoreOneInt = highScoreOneInt;
+        data.highScoreTwoString = highScoreTwo;
+        data.highScoreTwoInt = highScoreTwoInt;
+        data.highScoreThreeString = highScoreThree;
+        data.highScoreThreeInt = highScoreThreeInt;
 
+        string json = JsonUtility.ToJson(data);
+        File.WriteAllText(Application.persistentDataPath + "saveFile.json", json);
     }
-
-    [System.Serializable]
-    class SaveData
-    {
-        
-    } // Class
 
 }
